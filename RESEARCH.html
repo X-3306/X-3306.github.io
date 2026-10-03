@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarnhaven Research — Autonomous-agent web-defense study</title>
+<meta name="description" content="A controlled research study of how autonomous AI agents interact with layered defenses on a synthetic web application. Public information, data handling, and publication timeline.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600&family=Caveat:wght@400;500;600&display=swap" rel="stylesheet">
+    
+<style>
+  :root {
+    --bg: #0e1317;
+    --bg-raised: #141b21;
+    --bg-inset: #0a0e11;
+    --ink: #e8e1cf;
+    --ink-soft: #a29a86;
+    --ink-faint: #66614f;
+    --rule: #262e34;
+    --rule-soft: #1c242a;
+    --rule-strong: #3a444c;
+    --copper: #d99f5e;
+    --copper-soft: #8a6a3f;
+    --blue: #82a9c9;
+    --blue-soft: #4d6a80;
+    --rust: #c76a4d;
+    --grid: rgba(140, 175, 205, 0.045);
+    --grid-strong: rgba(140, 175, 205, 0.075);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+      radial-gradient(ellipse at 50% 0%, rgba(80, 120, 160, 0.06), transparent 60%);
+    background-size: 28px 28px, 28px 28px, 100% 100%;
+    background-position: -1px -1px, -1px -1px, 0 0;
+    color: var(--ink);
+    font-family: "EB Garamond", "Iowan Old Style", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.62;
+    font-feature-settings: "onum" 1, "liga" 1, "kern" 1;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.055;
+    mix-blend-mode: screen;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background: radial-gradient(ellipse at 50% 35%, transparent 45%, rgba(0, 0, 0, 0.5) 100%);
+  }
+
+  .dossier {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 36px 120px;
+    position: relative;
+    z-index: 3;
+  }
+
+  .author-card {
+    max-width: 1120px;
+    margin: 28px auto 0;
+    padding: 0 36px 14px;
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    position: relative;
+    z-index: 3;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .author-kicker {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .author-signature {
+    font-family: "Caveat", cursive;
+    font-size: 30px;
+    line-height: 1;
+    color: var(--copper);
+    letter-spacing: 0.005em;
+    position: relative;
+    transform: rotate(-1.2deg);
+    padding: 0 6px 2px;
+  }
+
+  .author-signature::after {
+    content: "";
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    bottom: 0;
+    height: 1px;
+    background: var(--copper);
+    opacity: 0.5;
+    transform: skewX(-14deg);
+  }
+
+  .author-links {
+    margin-left: auto;
+    display: flex;
+    gap: 20px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .author-links a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .author-links a:hover,
+  .author-links a:focus-visible {
+    color: var(--copper);
+    border-bottom-color: var(--copper-soft);
+    outline: none;
+  }
+
+  .author-links .link-mark {
+    color: var(--copper);
+    margin-right: 6px;
+    font-size: 11px;
+    display: inline-block;
+    transition: transform 0.15s ease;
+  }
+
+  .author-links a:hover .link-mark,
+  .author-links a:focus-visible .link-mark {
+    transform: translate(1px, -1px);
+  }
+
+  .titleblock {
+    margin: 32px auto 0;
+    max-width: 1120px;
+    padding: 0 36px;
+    position: relative;
+    z-index: 3;
+  }
+
+  .tb-frame {
+    border: 1.5px solid var(--rule-strong);
+    background: rgba(20, 27, 33, 0.6);
+    display: grid;
+    grid-template-columns: 1fr 280px;
+  }
+
+  .tb-main {
+    padding: 22px 26px 20px;
+    border-right: 1px solid var(--rule-strong);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .tb-kicker {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--copper);
+  }
+
+  .tb-title {
+    font-family: "EB Garamond", serif;
+    font-weight: 500;
+    font-size: 27px;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .tb-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink-soft);
+    margin-left: 6px;
+  }
+
+  .tb-sub {
+    font-size: 15.5px;
+    font-style: italic;
+    color: var(--ink-soft);
+    max-width: 60ch;
+  }
+
+  .tb-meta {
+    padding: 18px 22px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+  }
+
+  .tb-meta dl {
+    display: grid;
+    grid-template-columns: 84px 1fr;
+    gap: 5px 10px;
+    margin: 0;
+  }
+
+  .tb-meta dt {
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .tb-meta dd { margin: 0; color: var(--ink); }
+
+  .tb-meta dd.status-live {
+    color: var(--copper);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+  }
+
+  .hero {
+    padding: 100px 0 40px;
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 220px;
+    column-gap: 60px;
+  }
+
+  .hero .body { grid-column: 1; }
+
+  .hero h1 {
+    margin: 0;
+    font-weight: 500;
+    font-size: clamp(56px, 9.5vw, 112px);
+    line-height: 0.92;
+    letter-spacing: -0.022em;
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero h1 .first { display: block; }
+
+  .hero h1 .second {
+    display: block;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.32em;
+    letter-spacing: 0.005em;
+    color: var(--ink-soft);
+    margin-top: 14px;
+    margin-left: 6px;
+    padding-left: 14px;
+    border-left: 2px solid var(--copper);
+    line-height: 1.1;
+  }
+
+  .hero .lede {
+    margin: 42px 0 0;
+    max-width: 60ch;
+    font-size: 20px;
+    line-height: 1.58;
+    color: var(--ink-soft);
+  }
+
+  .hero .lede strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .hero-meta {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 26px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .hero-meta span::before {
+    content: "◦ ";
+    color: var(--copper);
+    letter-spacing: 0;
+  }
+
+  .stamp {
+    grid-column: 2;
+    justify-self: end;
+    align-self: start;
+    margin-top: 6px;
+    padding: 14px 20px 12px;
+    border: 1.5px solid var(--copper);
+    outline: 1px solid var(--copper-soft);
+    outline-offset: 3px;
+    color: var(--copper);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.65;
+    transform: rotate(-6.5deg);
+    opacity: 0.82;
+  }
+  .stamp span { display: block; }
+  .stamp .stamp-mid {
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    margin: 5px 0;
+    padding: 5px 0;
+    border-top: 1px solid var(--copper-soft);
+    border-bottom: 1px solid var(--copper-soft);
+  }
+
+  section.sec {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 220px;
+    column-gap: 60px;
+    padding-top: 34px;
+    margin-top: 60px;
+    border-top: 1px solid var(--rule);
+    position: relative;
+  }
+
+  section.sec::before,
+  section.sec::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-top: 1px solid var(--ink-faint);
+    border-left: 1px solid var(--ink-faint);
+    top: -1px;
+    left: 0;
+  }
+  section.sec::after {
+    border-top: 1px solid var(--ink-faint);
+    border-left: 0;
+    border-right: 1px solid var(--ink-faint);
+    left: auto;
+    right: 0;
+  }
+
+  .sec-head {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 30px;
+  }
+
+  .sec-num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--copper);
+    text-transform: uppercase;
+  }
+
+  .sec-head h2 {
+    margin: 0;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+  }
+
+  .sec-ref {
+    margin-left: auto;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+
+  .sec-body { grid-column: 1; }
+  .sec-note { grid-column: 2; align-self: start; }
+
+  .sec-body p {
+    margin: 0 0 18px;
+    max-width: 62ch;
+  }
+  .sec-body p:last-child { margin-bottom: 0; }
+
+  .sec-body h3 {
+    margin: 38px 0 14px;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: 0.005em;
+    color: var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .sec-body h3::before {
+    content: "—";
+    color: var(--copper);
+    font-weight: 400;
+  }
+
+  .sec-body em { font-style: italic; }
+  .sec-body strong { font-weight: 600; color: var(--ink); }
+
+  .mono {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.82em;
+    letter-spacing: 0.01em;
+  }
+
+  code {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.83em;
+    padding: 1px 6px;
+    background: rgba(130, 169, 201, 0.09);
+    border-radius: 2px;
+    color: var(--blue);
+  }
+
+  .note {
+    font-family: "Caveat", cursive;
+    font-size: 19px;
+    line-height: 1.35;
+    color: var(--ink-soft);
+    padding-left: 18px;
+    border-left: 1px dashed var(--rule-strong);
+    transform: rotate(-0.4deg);
+  }
+  .note.copper { color: var(--copper); }
+  .note.blue { color: var(--blue); }
+  .note::before {
+    content: "✎ ";
+    font-family: inherit;
+    font-size: 15px;
+    opacity: 0.7;
+  }
+  .note p { margin: 0 0 12px; }
+  .note p:last-child { margin-bottom: 0; }
+
+  ul.ticks {
+    list-style: none;
+    padding: 0;
+    margin: 18px 0 0;
+  }
+  ul.ticks li {
+    position: relative;
+    padding-left: 26px;
+    margin-bottom: 11px;
+    max-width: 62ch;
+  }
+  ul.ticks li::before {
+    content: "▸";
+    position: absolute;
+    left: 4px;
+    top: 0;
+    color: var(--copper);
+    font-size: 12px;
+  }
+
+  ol.numbered {
+    list-style: none;
+    counter-reset: n;
+    padding: 0;
+    margin: 20px 0 0;
+  }
+  ol.numbered > li {
+    counter-increment: n;
+    position: relative;
+    padding-left: 52px;
+    margin-bottom: 16px;
+    max-width: 62ch;
+  }
+  ol.numbered > li::before {
+    content: counter(n, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 2px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--copper);
+    border: 1px solid var(--copper-soft);
+    padding: 1px 6px;
+    line-height: 1.4;
+  }
+
+  .plate {
+    grid-column: 1 / -1;
+    border: 1.5px solid var(--rule-strong);
+    background: rgba(20, 27, 33, 0.5);
+    position: relative;
+    margin-top: 12px;
+  }
+  .plate-cap {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--rule-strong);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    background: rgba(130, 169, 201, 0.04);
+  }
+  .plate-cap .t { color: var(--ink); letter-spacing: 0.16em; }
+  .plate-body { padding: 4px 0; }
+
+  table.data {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15.5px;
+  }
+  table.data th,
+  table.data td {
+    text-align: left;
+    padding: 14px 18px;
+    vertical-align: top;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  table.data th {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+    background: rgba(130, 169, 201, 0.035);
+  }
+  table.data tr:last-child td { border-bottom: 0; }
+  table.data td:first-child {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: var(--blue);
+    white-space: nowrap;
+    width: 24%;
+  }
+  table.data td.data-ret {
+    color: var(--ink-soft);
+    font-style: italic;
+    width: 22%;
+  }
+
+  .timeline {
+    grid-column: 1 / -1;
+    margin-top: 26px;
+    position: relative;
+    padding-left: 34px;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 12px;
+    bottom: 12px;
+    width: 1px;
+    background: linear-gradient(to bottom,
+      transparent,
+      var(--rule-strong) 8%,
+      var(--rule-strong) 92%,
+      transparent);
+  }
+
+  .tl-item {
+    position: relative;
+    padding: 8px 0 26px;
+  }
+  .tl-item:last-child { padding-bottom: 0; }
+
+  .tl-marker {
+    position: absolute;
+    left: -34px;
+    top: 12px;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--rule-strong);
+    background: var(--bg);
+    border-radius: 0;
+  }
+  .tl-item.done .tl-marker {
+    border-color: var(--copper);
+    background: var(--copper);
+  }
+  .tl-item.active .tl-marker {
+    border-color: var(--copper);
+    background: var(--bg);
+    box-shadow: 0 0 0 3px rgba(217, 159, 94, 0.15);
+  }
+  .tl-item.planned .tl-marker {
+    border-style: dashed;
+  }
+
+  .tl-date {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 4px;
+  }
+  .tl-item.planned .tl-date { color: var(--ink-faint); }
+
+  .tl-title {
+    font-weight: 500;
+    font-size: 19px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .tl-desc {
+    font-size: 16px;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    margin: 0;
+  }
+
+  .callout {
+    margin: 28px 0 0;
+    padding: 18px 22px 18px 26px;
+    border-left: 3px solid var(--copper);
+    background: rgba(217, 159, 94, 0.045);
+    font-size: 16.5px;
+    color: var(--ink-soft);
+    position: relative;
+  }
+  .callout::before {
+    content: attr(data-label);
+    position: absolute;
+    top: -9px;
+    left: 20px;
+    background: var(--bg);
+    padding: 0 8px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--copper);
+  }
+  .callout strong { color: var(--ink); }
+  .callout.blue {
+    border-left-color: var(--blue);
+    background: rgba(130, 169, 201, 0.045);
+  }
+  .callout.blue::before { color: var(--blue); }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-top: 20px;
+    grid-column: 1 / -1;
+  }
+  .card {
+    background: rgba(20, 27, 33, 0.5);
+    padding: 20px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .card .card-num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--copper);
+  }
+  .card h4 {
+    margin: 0;
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--ink);
+    letter-spacing: 0.005em;
+  }
+  .card p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+
+  .diagram {
+    grid-column: 1 / -1;
+    margin: 24px 0 0;
+    border: 1.5px solid var(--rule-strong);
+    background: rgba(20, 27, 33, 0.5);
+    padding: 22px 24px 16px;
+  }
+
+  .diagram-cap {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .diagram-cap .t { color: var(--ink); }
+  .diagram svg { display: block; width: 100%; height: auto; }
+
+  .svg-node {
+    fill: rgba(20, 27, 33, 0.85);
+    stroke: var(--rule-strong);
+    stroke-width: 1.2;
+  }
+  .svg-node.copper { stroke: var(--copper); }
+  .svg-node.blue { stroke: var(--blue); }
+  .svg-node.dashed { stroke-dasharray: 4 3; }
+  .svg-line {
+    stroke: var(--rule-strong);
+    stroke-width: 1.1;
+    fill: none;
+    marker-end: url(#arrow);
+  }
+  .svg-line.copper { stroke: var(--copper); marker-end: url(#arrow-copper); }
+  .svg-line.blue { stroke: var(--blue); marker-end: url(#arrow-blue); }
+  .svg-line.dashed { stroke-dasharray: 4 3; }
+  .svg-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    fill: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .svg-label.sm { font-size: 9.5px; fill: var(--ink-faint); }
+  .svg-label.copper { fill: var(--copper); }
+  .svg-label.blue { fill: var(--blue); }
+  .svg-italic {
+    font-family: "Caveat", cursive;
+    font-size: 15px;
+    fill: var(--copper);
+  }
+
+  footer.colophon {
+    margin-top: 100px;
+    padding-top: 34px;
+    border-top: 1.5px solid var(--rule-strong);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+  }
+  footer.colophon h5 {
+    margin: 0 0 10px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+  }
+  footer.colophon p { margin: 0 0 8px; }
+  footer.colophon a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule-strong);
+  }
+  footer.colophon a:hover { border-bottom-color: var(--copper); color: var(--copper); }
+
+  .colophon-end {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .scope-alert {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    max-width: 420px;
+    padding: 14px 18px;
+    border: 1px solid rgba(255, 180, 0, 0.45);
+    border-radius: 10px;
+    background: rgba(30, 24, 10, 0.94);
+    color: #f5f5f5;
+    font: 14px/1.5 system-ui, sans-serif;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
+    z-index: 9999;
+    pointer-events: none;
+  }
+
+  .scope-alert strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #ffbf3f;
+    font-size: 13px;
+    letter-spacing: .06em;
+  }
+
+  @media (max-width: 860px) {
+    body { font-size: 17px; }
+
+    .author-card {
+      flex-wrap: wrap;
+      padding: 0 22px 14px;
+      gap: 10px 18px;
+    }
+    .author-signature { font-size: 26px; }
+    .author-links {
+      margin-left: 0;
+      width: 100%;
+      gap: 16px;
+    }
+
+    .tb-frame { grid-template-columns: 1fr; }
+    .tb-main { border-right: 0; border-bottom: 1px solid var(--rule-strong); }
+
+    .dossier { padding: 0 22px 80px; }
+    .titleblock { padding: 0 22px; }
+
+    .hero { grid-template-columns: 1fr; padding-top: 56px; }
+    .hero .body { grid-column: 1; }
+    .stamp {
+      grid-column: 1;
+      justify-self: start;
+      margin-top: 34px;
+      margin-bottom: 10px;
+      transform: rotate(-4deg);
+    }
+
+    section.sec {
+      grid-template-columns: 1fr;
+      row-gap: 24px;
+    }
+    .sec-head { flex-wrap: wrap; }
+    .sec-ref { margin-left: 0; width: 100%; }
+    .sec-note {
+      grid-column: 1;
+      border-left: 0;
+      border-top: 1px dashed var(--rule-strong);
+      padding-left: 0;
+      padding-top: 14px;
+      max-width: 46ch;
+    }
+
+    table.data { font-size: 14.5px; }
+    table.data th, table.data td { padding: 11px 13px; }
+    table.data td:first-child { width: auto; white-space: normal; }
+    table.data td.data-ret { width: auto; }
+
+    footer.colophon { grid-template-columns: 1fr; gap: 28px; }
+  }
+
+  @media (max-width: 520px) {
+    .hero h1 { font-size: 50px; }
+    .hero h1 .second { font-size: 0.4em; margin-top: 10px; }
+    .sec-head h2 { font-size: 25px; }
+    .timeline { padding-left: 26px; }
+    .tl-marker { left: -26px; width: 12px; height: 12px; }
+  }
+
+  @media print {
+    body { background: white; color: black; }
+    body::before, body::after { display: none; }
+    .stamp { opacity: 1; color: black; border-color: black; }
+    section.sec { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="author-card">
+  <span class="author-kicker">Author</span>
+  <span class="author-signature">X-3306</span>
+  <nav class="author-links" aria-label="Author links">
+    <a href="https://github.com/X-3306" target="_blank" rel="noopener noreferrer">
+      <span class="link-mark" aria-hidden="true">↗</span>GitHub
+    </a>
+    <a href="https://medium.com/@X-3306" target="_blank" rel="noopener noreferrer">
+      <span class="link-mark" aria-hidden="true">↗</span>Medium
+    </a>
+  </nav>
+</div>
+
+<header class="titleblock">
+  <div class="tb-frame">
+    <div class="tb-main">
+      <span class="tb-kicker">Research programme · Public information sheet</span>
+      <span class="tb-title">Tarnhaven <em>Research</em></span>
+      <span class="tb-sub">A controlled study of how autonomous AI agents interact with layered defenses on a synthetic web application.</span>
+    </div>
+    <div class="tb-meta">
+      <dl>
+        <dt>Document</dt><dd>Public brief</dd>
+        <dt>Revision</dt><dd>10 / 2026</dd>
+        <dt>Status</dt><dd class="status-live">OPEN · BETA-RELEASE</dd>
+        <dt>Scope</dt><dd>Synthetic environment</dd>
+        <dt>Audience</dt><dd>Invited researchers</dd>
+      </dl>
+    </div>
+  </div>
+</header>
+
+<main class="dossier">
+
+  <section class="hero">
+    <div class="body">
+      <h1>
+        <span class="first">Tarnhaven</span>
+        <span class="second">a research testbed for<br>autonomous agent behaviour</span>
+      </h1>
+
+      <p class="lede">
+        Tarnhaven is a self-contained research environment used to observe how
+        <strong>autonomous AI agents</strong> move through a realistic multi-step web task when
+        they meet layered defensive responses. Every account, credential, reference, person, record, and artifact inside
+        the environment is <strong>synthetic</strong>. The study does not attempt to identify,
+        classify, or attack any real system. <strong>
+      </p>
+<br>
+<strong>Any references to existing companies (e.g., the "Trusted by" section) are included solely to give the AI ​​model a credible appearance, the project is not actually affiliated with any of them in any way.</strong>
+<br>
+      <div class="hero-meta">
+        <span>Synthetic-only target</span>
+        <span>Voluntary, unpaid participation</span>
+        <span>Aggregate results only</span>
+      </div>
+    </div>
+
+    <div class="stamp" aria-hidden="true">
+      <span>Public document</span>
+      <span class="stamp-mid">PRE-RELEASE</span>
+      <span>Rev. 10 · 2026</span>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <span class="sec-num">§ 01</span>
+      <h2>Why this exists</h2>
+      <span class="sec-ref">Public brief · Rev. 10</span>
+    </div>
+
+    <div class="sec-body">
+      <p style="font-size: 21px; line-height: 1.5; color: var(--ink); max-width: 60ch;">
+       
+I came up with the idea for the project over six months ago, but the primary reason it ultimately took its current form was the OpenAI:Hugging Face incident. The project’s core question is whether and which security methods specifically designed to counter automated attacks by capable models can actually stop them (the project combines several existing, slightly "enhanced" techniques with a few experimental ones I devised myself). including telemetry collection from every process. I set out to build the project on a limited budget (specifically, a zero-cost one). That wasn't exactly easy, but I ultimately succeeded, hence the use of a DuckDNS domain and free credits on google cloud. I will describe the entire architecture, backend, and features that didn't make the final cut once the project concludes: that is, in 28 days from the time of this post (October 2, 2026). (Or, alternatively, if the hosting fails due to excessive traffic--->a scenario I also consider a distinct possibility.)
+</p>
+
+<p> Automated agents are fast, persistent, and increasingly capable of completing multi-step tasks on
+        the open web. The security conversation around them is loud, but the public evidence is thin.
+        Tarnhaven was built to make part of that conversation testable.
+      </p>
+
+      <p>
+        The project is a research instrument, not a product. It exists so that a specific, narrow
+        question can be asked under controlled conditions, with a real target, a fixed task, and a
+        measurable outcome, rather than inferred from a screenshot, a blog post, or an anecdote.
+      </p>
+
+      <p>
+        Every element of the environment is designed and documented by me. All data inside
+        it is generated. Nothing in scope touches a third-party service, a real customer record, or a
+        production system.
+      </p>
+    </div>
+
+    <aside class="sec-note note copper">
+      <p>The goal is a small, honest measurement, not a headline about “AI versus security.”</p>
+      <p>If the environment fails to produce a clean signal, that is a result worth publishing too.</p>
+    </aside>
+  </section>
+
+  <style>
+  .ticks.deny li::before { content: "✕"; color: var(--rust); font-size: 12px; }
+</style>
+
+<section class="sec">
+  <div class="sec-head">
+    <span class="sec-num">§ 02a</span>
+    <h2>Rules of engagement</h2>
+    <span class="sec-ref">Scope · permitted and prohibited</span>
+  </div>
+
+  <div class="sec-body">
+    <p>
+      The only research target is <strong>https://tarnhavensystems.duckdns.org</strong>.
+      Everything else, including this information page, is out of scope. Using the target means
+      you accept the rules below.
+    </p>
+
+    <h3>Permitted</h3>
+    <ul class="ticks">
+      <li>Testing the research target with automated AI agents that you operate yourself, under your own provider accounts.</li>
+      <li>Any model, framework, or harness, as long as it stays within the rules on this page.</li>
+      <li>Ordinary web interaction with the target: browsing, HTTP requests, form submission, creating synthetic accounts, and using synthetic credentials found inside the environment.</li>
+      <li>Runs during the study window only: from October 2, 2026 until October 30, 2026 at the latest.</li>
+      <li>Traffic within the campaign rate limit of <strong>30 requests per second</strong> per source IP address. Participants sharing an IP address may share this limit.</li>
+      <li>Reporting your run outcome through the Run Report form.</li>
+    </ul>
+
+    <h3>Not permitted</h3>
+    <ul class="ticks deny">
+      <li>Manual, human-operated attacks on the target, including manual attempts to trigger its resource-exhaustion mechanisms.</li>
+      <li>Any traffic to hosts other than the research target, including this page and the infrastructure behind the target (cloud provider, DNS provider, telemetry or operator systems, metadata services).</li>
+      <li>Denial-of-service, load testing, or traffic above the campaign rate limit.</li>
+      <li>Port scanning, network scanning, or any attempt to discover or reach systems behind the target.</li>
+      <li>Pivoting or lateral movement outside the target application.</li>
+      <li>Social engineering, phishing, or contacting third parties named on the target. Company names and logos shown there are decorative and carry no affiliation.</li>
+      <li>Tampering with or disabling telemetry, or attempting to identify other participants.</li>
+      <li>Using real credentials, real personal data, or personal accounts of any kind.</li>
+      <li>Publishing the solution or the design of the target's defensive layers before the study window closes.</li>
+    </ul>
+  </div>
+
+  <aside class="sec-note note copper">
+    <p>No authorisation is granted for any system other than the research target.</p>
+  </aside>
+</section>
+
+      <aside class="sec-note note blue">
+ <p> The target may deliberately waste or exhaust an agent's resources (time, tokens) and may
+    contain content intended to manipulate or halt agent behaviour. Run your agent in an isolated
+    environment with a firm spending cap. If anything appears to involve real data
+    or an out-of-scope system, stop the run immediately and report it.
+  </p>
+</aside>
+
+
+      <h3>What it is not</h3>
+      <ul class="ticks">
+        <li>It is not an AI detector. No part of the system claims to determine whether a visitor is a human or a model with 100% confidence.</li>
+        <li>It is not a live target for third parties. The only authorised host is the one listed in the campaign brief.</li>
+        <li>It is not an evaluation of any specific vendor, framework, or model provider.</li>
+      </ul>
+    </div>
+
+    <aside class="sec-note note blue">
+      <p>Agents are clustered by model, harness, and time block. Runs are not treated as independent samples of “AI.”</p>
+    </aside>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <span class="sec-num">§ 03</span>
+      <h2>Data, privacy, and what I keep</h2>
+      <span class="sec-ref">Public brief · data handling</span>
+    </div>
+
+    <div class="sec-body">
+      <p>
+        Running the study requires recording enough about each session to measure behaviour and to
+        reproduce the analysis. This section describes what is collected, how it is pseudonymised, and
+        how long it is kept. It is written for you (the human operator) who is deciding whether to participate.
+      </p>
+
+      <p>
+        <strong>Raw personal data is never published.</strong> Only reviewed, aggregated results are
+        released. Individual session records and unredacted telemetry stay private to the researcher
+        and are deleted at the end of the retention window described below.
+      </p>
+
+      <h3>Anonymisation in practice</h3>
+      <ul class="ticks">
+        <li><strong>IP addresses</strong> are never stored in raw form. Each address is transformed with a keyed one-way function before it reaches the research database, and the key is rotated on a fixed schedule. Reversal is not practical.</li>
+        <li><strong>Browser session identifiers</strong> are replaced with a per-run pseudonym. Two runs from the same operator are not linked unless the operator opts in to a follow-up interview.</li>
+        <li><strong>Email addresses</strong> submitted during synthetic account creation are discarded after use, and any email-shaped value that is kept is stored as a keyed hash.</li>
+        <li><strong>User-agent strings</strong> are reduced to a coarse class (for example: headless browser, direct HTTP client, browser with rendering).</li>
+        <li><strong>Request bodies and credentials</strong> submitted by the agent are not retained.</li>
+      </ul>
+
+      <h3>What is pseudonymised, not anonymous</h3>
+      <p>
+        The combination of route, timing, and user-agent class can still be re-identifying in the
+        abstract. The study describes its records as <em>pseudonymised</em>, not <em>anonymous</em>,
+        and keeps the retention window short for exactly this reason.
+      </p>
+    </div>
+
+    <aside class="sec-note note copper">
+      <p>Pseudonymisation is not anonymisation. I say what I keep, and I say it in plain terms.</p>
+    </aside>
+
+    <div class="plate">
+      <div class="plate-cap">
+        <span class="t">Table 03.1 — Records kept per run</span>
+        <span>Retention: study window</span>
+      </div>
+      <div class="plate-body">
+        <table class="data">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Purpose</th>
+              <th>Retention</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Session pseudonym</td>
+              <td>Linking events from a single run without exposing identity.</td>
+              <td class="data-ret">Deletion after study window</td>
+            </tr>
+            <tr>
+              <td>Hashed IP</td>
+              <td>Rate-limiting and abuse detection during the campaign only.</td>
+              <td class="data-ret">Rotated key · not reversible</td>
+            </tr>
+            <tr>
+              <td>Request route and timing</td>
+              <td>Measuring progression, stalls, and cost per stage.</td>
+              <td class="data-ret">Published in aggregate only</td>
+            </tr>
+            <tr>
+              <td>User-agent class</td>
+              <td>Separating browser-agent runs from direct HTTP runs.</td>
+              <td class="data-ret">Published in aggregate only</td>
+            </tr>
+            <tr>
+              <td>Behavioural summaries</td>
+              <td>Coarse interaction features, only when a browser rendered the session.</td>
+              <td class="data-ret">Published in aggregate only</td>
+            </tr>
+            <tr>
+              <td>Run outcome</td>
+              <td>Whether the run reached the terminal state, and where it stopped.</td>
+              <td class="data-ret">Published in aggregate only</td>
+            </tr>
+            <tr>
+              <td>Model / framework</td>
+              <td>Self-reported by the operator at submission time.</td>
+              <td class="data-ret">Published in aggregate only</td>
+            </tr>
+            <tr>
+              <td>Attribution preference</td>
+              <td>Whether the contributor wants to be named in the final report.</td>
+              <td class="data-ret">Deletion after publication</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout blue" data-label="Note on retention">
+      Records are deleted after the retention window on a documented schedule. Aggregate statistics
+      that cannot be traced back to a single run may be kept longer for reproducibility.
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <span class="sec-num">§ 04</span>
+      <h2>What I do not collect</h2>
+      <span class="sec-ref">Public brief · exclusions</span>
+    </div>
+
+    <div class="sec-body">
+      <p>
+        A clear study is as much about what it refuses to gather as what it records. The following
+        categories are outside scope, and any operator observing collection outside this list is asked
+        to stop the run and report it.
+      </p>
+
+      <div class="cards">
+        <div class="card">
+          <span class="card-num">01</span>
+          <h4>Raw prompts</h4>
+          <p>Private system prompts, agent instructions, or conversation transcripts are not collected. <--- This Is Optional, only if you decide to share it</p>
+        </div>
+        <div class="card">
+          <span class="card-num">02</span>
+          <h4>Credentials</h4>
+          <p>Submitted passwords, API keys, and tokens are not retained, logged, or exported.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">03</span>
+          <h4>Unrelated targets</h4>
+          <p>Traffic to any host outside the campaign scope is not authorised and not part of the study.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">04</span>
+          <h4>Personal identifiers</h4>
+          <p>Names, addresses, and payment data have no role in the study and are never requested.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">05</span>
+          <h4>Real vulnerabilities</h4>
+          <p>The environment contains only intentional, documented, synthetic weaknesses.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">06</span>
+          <h4>Participant recordings</h4>
+          <p>No audio, video, or screen capture is taken at any point in the study.</p>
+        </div>
+      </div>
+    </div>
+
+    <aside class="sec-note note blue">
+      <p>If a run appears to expose something outside this list, stop immediately and contact with me.</p>
+    </aside>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <span class="sec-num">§ 05</span>
+      <h2>Timeline and publication</h2>
+      <span class="sec-ref">Public brief · schedule</span>
+    </div>
+
+    <div class="sec-body">
+      <p>
+        The study runs in clearly separated phases. Nothing is published from inside the campaign
+        window, everything that is published is reviewed, aggregated, and stripped of any data that
+        could identify a participant.
+      </p>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item done">
+        <div class="tl-marker"></div>
+        <div class="tl-date">Phase 1 · Complete</div>
+        <div class="tl-title">Environment design and internal pilot</div>
+        <p class="tl-desc">Synthetic target built, defensive classes defined, scoring and observability calibrated on disposable runs. No external participants.</p>
+      </div>
+
+      <div class="tl-item planned">
+        <div class="tl-marker"></div>
+        <div class="tl-date">Phase 2 · After the window</div>
+        <div class="tl-title">Analysis and internal review</div>
+        <p class="tl-desc">Runs are classified, exclusions documented, and the analysis plan is executed. No results are shared during this phase.</p>
+      </div>
+
+      <div class="tl-item planned">
+        <div class="tl-marker"></div>
+        <div class="tl-date">Phase 3 · Publication</div>
+        <div class="tl-title">Aggregate report</div>
+        <p class="tl-desc">A written report describes the method, the arms tested, the observed outcomes, the failure modes, and the limitations. Contributors who opted in to attribution are named; everyone else remains aggregate.</p>
+      </div>
+
+      <div class="tl-item planned">
+        <div class="tl-marker"></div>
+        <div class="tl-date">Phase 4 · After report</div>
+        <div class="tl-title">Source and methodology release</div>
+        <p class="tl-desc">The full methodology and security aspects are released publicly only after the campaign window has closed.</p>
+      </div>
+    </div>
+
+    <div class="callout" data-label="Why the delay">
+      Releasing the source before the study window closes would invalidate the measurement, because an
+      agent with metodology and security access can read the exact design of every defensive layer. Full Report is
+      released afterwards so that results remain reproducible by anyone.
+    </div>
+  </section>
+    
+    <section class="sec">
+    <div class="sec-head">
+      <span class="sec-num">§ 05a</span>
+      <h2>Results repository</h2>
+      <span class="sec-ref">Public brief · publication</span>
+    </div>
+ 
+    <div class="sec-body">
+      <p>
+        Everything that is published after the study will live in one public GitHub repository.
+        It is <strong>empty on purpose</strong> until the study window closes, so that anyone
+        interested has a single permanent place to follow. For now it contains only a README
+        with the schedule and a list of what will be released.
+      </p>
+ 
+      <a class="repo-card" href="https://github.com/X-3306/agent-web-defense-study-2026" target="_blank" rel="noopener noreferrer">
+        <span class="repo-main">
+          <span class="repo-label">GitHub repository</span>
+          <span class="repo-path">X-3306/agent-web-defense-study-2026</span>
+          <span class="repo-status"><i aria-hidden="true"></i>Empty · awaiting publication</span>
+        </span>
+        <span class="repo-open">Open<span class="link-mark" aria-hidden="true">↗</span></span>
+      </a>
+ 
+      <div class="callout blue" data-label="Dates">
+        Planned end of the study window: <strong>30 October 2026</strong>. Aggregation and preparation
+        of the collected data may then take up to <strong>3 months</strong> (by 30 January 2027 at the
+        latest). It will probably be faster, and the 3 months is a ceiling, not a target. The window may
+        end earlier if the hosting fails.
+      </div>
+    </div>
+ 
+    <aside class="sec-note note blue">
+      <p>Use Watch on the repository to be notified when something is published.</p>
+      <p>Like every page other than the research target, it is out of scope.</p>
+    </aside>
+ 
+    <style>
+      .repo-card {
+        margin: 28px 0 0; padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; gap: 20px;
+        text-decoration: none; color: inherit; position: relative;
+        background: var(--bg-raised); border: 1px solid var(--rule-strong);
+        transition: border-color 0.15s ease, background 0.15s ease;
+      }
+      .repo-card::before, .repo-card::after { content: ""; position: absolute; width: 12px; height: 12px; border: 0 solid var(--copper-soft); }
+      .repo-card::before { top: -1px; left: -1px; border-top-width: 1.5px; border-left-width: 1.5px; }
+      .repo-card::after { bottom: -1px; right: -1px; border-bottom-width: 1.5px; border-right-width: 1.5px; }
+      .repo-card:hover, .repo-card:focus-visible { border-color: var(--copper-soft); background: rgba(217, 159, 94, 0.05); outline: none; }
+      .repo-main { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+      .repo-label, .repo-status, .repo-open {
+        font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+      }
+      .repo-label { color: var(--ink-faint); }
+      .repo-path { font-family: "IBM Plex Mono", monospace; font-size: 15px; color: var(--ink); overflow-wrap: anywhere; }
+      .repo-status { color: var(--ink-soft); display: inline-flex; align-items: center; gap: 8px; }
+      .repo-status i { width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid var(--copper); display: inline-block; }
+      .repo-open { color: var(--copper); white-space: nowrap; flex-shrink: 0; }
+      .repo-open .link-mark { margin-left: 6px; font-size: 11px; display: inline-block; transition: transform 0.15s ease; }
+      .repo-card:hover .link-mark, .repo-card:focus-visible .link-mark { transform: translate(1px, -1px); }
+      @media (max-width: 640px) { .repo-card { flex-direction: column; align-items: flex-start; } }
+    </style>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <span class="sec-num">§ 06</span>
+      <h2>Participation</h2>
+      <span class="sec-ref">Public brief · eligibility</span>
+    </div>
+
+    <div class="sec-body">
+      <p>
+        The invited-run campaign is small and by invitation. Participants are researchers and
+        practitioners who already work with AI agents, application security, or automated evaluation.
+        Participation is voluntary, unpaid, and can be withdrawn at any time before submission.
+      </p>
+
+      <h3>What is expected of a participant</h3>
+      <ul class="ticks">
+        <li>Read the full campaign brief before the first run.</li>
+        <li>Use an isolated browser profile or HTTP cookie jar per run, and keep that session state for the duration of the run.</li>
+        <li>Respect the campaign rate limits and the single authorised host.</li>
+        <li>Set a firm time and spending cap before starting.</li>
+        <li>Stop the run immediately if anything appears to involve real data or an out-of-scope system.</li>
+        <li>Submit the run outcome through the private reporting channel provided in the brief</li>
+          
+      </ul>
+
+      <h3>What participants receive</h3>
+      <ul class="ticks">
+        <li>A debrief that describes the assigned experimental condition after the run.</li>
+        <li>Access to the aggregate report</li>
+        <li>Opt-in attribution in the final report, if desired. Attribution is off by default.</li>
+        <li>a contribution to research that could potentially aid in the further development of defenses against this type of attack<li>
+      </ul>
+
+      <h3>What participants do not receive</h3>
+      <ul class="ticks">
+        <li>Payment.</li>
+        <li>Any guarantee about the outcome of the study.</li>
+        <li>Any endorsement of a specific vendor, framework, or model.</li>
+      </ul>
+    </div>
+
+    <aside class="sec-note note copper">
+      <p>Attribution is opt-in and reversible up to publication.</p>
+      <p>No names, transcripts, or session traces are published without explicit, separate permission.</p>
+    </aside>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <span class="sec-num">§ 07</span>
+      <h2>Principles</h2>
+      <span class="sec-ref">Public brief · ethics</span>
+    </div>
+
+    <div class="sec-body">
+      <p>
+        The study operates under a short list of commitments that do not change between phases.
+        They are written down so that anyone reviewing the project can hold it to them.
+      </p>
+
+      <ol class="numbered">
+        <li><strong>Synthetic only.</strong> No real credentials, records, or production systems are used anywhere in scope.</li>
+        <li><strong>Informed human operator.</strong> The human participant always knows the scope, the data handling, and the stop procedure before the first run, even when the agent itself is not briefed.</li>
+        <li><strong>Aggregate results only.</strong> Individual runs are never published. Raw telemetry stays private.</li>
+        <li><strong>No third-party targets.</strong> The only authorised host is the one listed in the brief. Nothing else is in scope.</li>
+        <li><strong>No deception about risk.</strong> The invitation describes what the study does at a level sufficient for a participant to make a real decision.</li>
+        <li><strong>Stop on ambiguity.</strong> If a run appears to expose something outside the stated boundaries, the run stops and is reported before anything else happens.</li>
+        <li><strong>Public methodology.</strong> The full method, including failures and negative results, is published with the aggregate findings.</li>
+      </ol>
+    </div>
+
+    <aside class="sec-note note blue">
+      <p>These commitments apply equally to the pilot phase, the invited campaign, and any follow-up study.</p>
+    </aside>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <span class="sec-num">§ 08</span>
+      <h2>Questions and contact</h2>
+      <span class="sec-ref">Public brief · correspondence</span>
+    </div>
+
+    <div class="sec-body">
+      <p>
+        Questions about scope, data handling, or participation are welcome before any run begins.
+        The same address is used for incident reports during the campaign.
+      </p>
+<br>
+        <br>
+      <p class="mono" style="font-size: 15px; letter-spacing: 0.02em; color: var(--ink);">
+        Contact: <span style="color: var(--copper);"> TarnhavenSystems@proton.me </span><br>
+        RUN REPORT Your Submission: <span style="color: var(--copper);">https://docs.google.com/forms/d/e/1FAIpQLSeFQLIvQA2M4jzF5IEZvMwvd9l2lDaTJvwwAhiDY97cAsU3fQ/viewform?usp=dialog</span>
+</p>
+
+<strong>THIS IS THE ONLY RESEARCH TARGET: <span style="color: var(--copper);">https://tarnhavensystems.duckdns.org</span><br> </strong>
+
+      <div class="callout blue" data-label="Notice">
+This site is a public information page. It is not a target, and it grants no authorisation to test any system other than the one explicitly listed as the research target. Participants operate their own agents under their own provider accounts and are responsible for their own actions, for their provider's terms of service, and for any damage caused by an agent they direct. The researcher provides the environment in good faith for a defined study, does not direct participant agents, and accepts no liability for third-party activity, for out-of-scope actions, or for losses arising from a participant's use of a model, framework, or service outside the stated scope. Nothing in this notice limits any rights or obligations that cannot be limited by law.
+      </div>
+    </div>
+
+    <aside class="sec-note note">
+      <p>No response is required if the study is not a fit.</p>
+      <p>There is no obligation to participate and no consequence for declining.</p>
+    </aside>
+  </section>
+
+  <footer class="colophon">
+    <div>
+      <h5>Document</h5>
+      <p>Tarnhaven Research</p>
+      <p>Public information sheet · Rev. 10</p>
+      <p>Audience: invited researchers, reviewers, and the general public</p>
+    </div>
+    <div>
+      <h5>Status</h5>
+      <p>Beta-Relese. Full source and methodology are published after the study window closes.</p>
+      <p>No results are available before then. This page describes intent, not findings.</p>
+    </div>
+    <div>
+      <h5>Notice</h5>
+      <p>Research instrument, not a product. Not an AI detector. Not a security boundary.</p>
+      <p>All target data is synthetic. All published results are aggregate.</p>
+    </div>
+  </footer>
+
+  <div class="colophon-end">
+    <span>End of document</span>
+    <span>Public brief · Rev. 10 · 2026</span>
+  </div>
+
+  <div class="scope-alert" role="status">
+    <strong>ALERT: RESEARCH SCOPE</strong>
+    <span>
+      This page is <b>NOT a research target</b> and must not be attacked.
+      It is provided for informational purposes only.
+      This page, as well as all other pages on this site, is <b>out of scope</b>.
+      The <b>only authorized research target</b> is explicitly identified at the bottom
+      of this page under the label <b>“RESEARCH TARGET”</b>.
+    </span>
+  </div>
+
+</main>
+
+</body>
+</html>
