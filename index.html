@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Tarnhaven Research | A note before you begin</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<script>document.documentElement.className = 'js';</script>
+<style>
+  :root {
+    --bg: #0e1317; --ink: #e8e1cf; --ink-soft: #a29a86; --ink-faint: #66614f;
+    --rule: #262e34; --rule-strong: #3a444c; --copper: #d99f5e; --copper-soft: #8a6a3f;
+    --grid: rgba(140, 175, 205, 0.045);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background-color: var(--bg);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+      radial-gradient(ellipse at 50% 0%, rgba(80, 120, 160, 0.06), transparent 60%);
+    background-size: 28px 28px, 28px 28px, 100% 100%;
+    background-position: -1px -1px, -1px -1px, 0 0;
+    color: var(--ink);
+    font-family: "EB Garamond", "Iowan Old Style", Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+    transition: opacity .7s ease;
+  }
+  body.leaving { opacity: 0; }
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 2;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.055; mix-blend-mode: screen;
+  }
+  body::after {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 1;
+    background: radial-gradient(ellipse at 50% 35%, transparent 45%, rgba(0, 0, 0, 0.5) 100%);
+  }
+
+  .frame {
+    position: relative; z-index: 3; display: flex; flex-direction: column;
+    min-height: 100vh; min-height: 100dvh;
+    padding: max(22px, env(safe-area-inset-top)) 36px max(22px, env(safe-area-inset-bottom));
+  }
+  .js .frame { height: 100vh; height: 100dvh; }
+
+  .bar, .foot {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 20px;
+    font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--ink-faint);
+  }
+  .bar { padding-bottom: 14px; border-bottom: 1px solid var(--rule); }
+  .bar b { font-weight: 500; color: var(--copper); }
+  .skip {
+    font: inherit; letter-spacing: inherit; text-transform: inherit; color: var(--ink-soft);
+    background: none; border: 0; border-bottom: 1px solid transparent; padding: 0 0 2px; cursor: pointer;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .skip:hover, .skip:focus-visible { color: var(--copper); border-bottom-color: var(--copper-soft); outline: none; }
+  .final .skip { visibility: hidden; }
+
+  .stage { flex: 1; min-height: 0; display: flex; overflow-y: auto; padding: 28px 0; }
+  .card { position: relative; margin: auto; width: min(780px, 100%); padding: 48px 44px; }
+  .card::before, .card::after { content: ""; position: absolute; width: 16px; height: 16px; border: 0 solid var(--copper-soft); }
+  .card::before { top: 0; left: 0; border-top-width: 1.5px; border-left-width: 1.5px; }
+  .card::after { bottom: 0; right: 0; border-bottom-width: 1.5px; border-right-width: 1.5px; }
+
+  .beat p, .beat h1 { margin: 0; letter-spacing: .005em; text-wrap: pretty; }
+  .beat p { font-size: clamp(21px, 3.1vw, 34px); line-height: 1.4; }
+  .beat p + p { margin-top: .85em; color: var(--ink-soft); }
+  .beat.final p { font-size: clamp(19px, 2.6vw, 27px); line-height: 1.5; }
+  .beat h1 { font-weight: 500; font-size: clamp(36px, 6.6vw, 70px); line-height: 1.04; }
+  .sig {
+    display: inline-block; margin-top: 22px; position: relative; padding: 0 6px 2px;
+    font-family: "Caveat", cursive; font-size: 30px; line-height: 1; color: var(--copper); transform: rotate(-1.2deg);
+  }
+  .sig::after { content: ""; position: absolute; left: 2px; right: 2px; bottom: 0; height: 1px; background: var(--copper); opacity: .5; transform: skewX(-14deg); }
+
+  .actions { margin-top: 38px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; }
+  .accept {
+    display: inline-block; padding: 13px 22px; text-decoration: none; color: var(--copper);
+    font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+    border: 1.5px solid var(--copper-soft); background: rgba(20, 27, 33, .6);
+    transition: background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .accept:hover, .accept:focus-visible { background: rgba(217, 159, 94, .12); border-color: var(--copper); color: var(--ink); outline: none; }
+  .scope { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: .08em; color: var(--ink-faint); max-width: 30ch; line-height: 1.5; }
+
+  /* Sequenced reveal (JS only; without JS everything is shown as a normal page) */
+  .js .beats { display: grid; }
+  .js .beat { grid-area: 1 / 1; opacity: 0; visibility: hidden; transition: opacity .6s ease, visibility 0s linear .6s; }
+  .js .beat.on { opacity: 1; visibility: visible; transition: opacity .6s ease; }
+  .js .w { display: inline-block; opacity: 0; filter: blur(7px); transform: translateY(6px); transition: opacity .7s ease, filter .7s ease, transform .7s ease; }
+  .js .on .w { opacity: 1; filter: none; transform: none; }
+  .js .sig, .js .actions { opacity: 0; transition: opacity .8s ease; }
+  .js .on .sig, .js .on .actions { opacity: 1; }
+  .js .sig { transition-delay: 0s; }
+  .js .on .sig { transition-delay: 1.5s; }
+  html:not(.js) .beat { margin-bottom: 44px; }
+  html:not(.js) .foot, html:not(.js) .skip { display: none; }
+
+  .ticks { display: flex; gap: 8px; }
+  .tick { width: 56px; height: 2px; background: var(--rule-strong); position: relative; overflow: hidden; }
+  .tick i { position: absolute; inset: 0; background: var(--copper); transform: scaleX(0); transform-origin: left; }
+  .tick.done i { transform: scaleX(1); background: var(--copper-soft); }
+  .tick.cur i { animation: fill var(--dwell, 6s) linear forwards; }
+  .tick.last i { animation: none; transform: scaleX(1); }
+  @keyframes fill { to { transform: scaleX(1); } }
+
+  @media (max-width: 640px) {
+    .frame { padding-left: 20px; padding-right: 20px; }
+    .card { padding: 36px 22px; }
+    .hint { display: none; }
+    .tick { width: 36px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .js .w { filter: none; transform: none; transition: opacity .3s ease; }
+    .tick.cur i { animation: none; transform: scaleX(1); }
+    body { transition: none; }
+  }
+</style>
+</head>
+<body>
+<div class="frame" id="frame">
+  <div class="bar">
+    <span><b>Tarnhaven Research</b> &nbsp;a note from the researcher</span>
+    <button class="skip" type="button" id="skip">Skip intro</button>
+  </div>
+
+  <main class="stage" id="stage">
+    <div class="card">
+      <div class="beats">
+        <section class="beat">
+          <h1>A note before you begin.</h1>
+          <span class="sig">from the researcher</span>
+        </section>
+
+        <section class="beat">
+          <p>I started this project because I wanted to move beyond guessing about how autonomous agents respond to different defensive measures.</p>
+        </section>
+
+        <section class="beat">
+          <p>I do not know whether the approaches in this prototype will make a meaningful difference, and I do not want to present them as proven defenses.</p>
+        </section>
+
+        <section class="beat">
+          <p>If the results are weak or inconclusive, that is still useful.</p>
+          <p>It may show which ideas do not justify further effort, or what a better study needs to control.</p>
+        </section>
+
+        <section class="beat">
+          <p>If some approaches appear promising, that would be a reason to test them more carefully, not proof that they work reliably in real systems.</p>
+          <p>Either way, I hope the project can contribute a small piece of evidence and help shape better questions for future research.</p>
+        </section>
+
+        <section class="beat final">
+          <p>I cannot offer compensation, and taking part will cost you time and tokens.</p>
+          <p>What I can offer is a chance to contribute to better evidence on how autonomous agents behave against different defenses, which matters if you are concerned about where this capability is heading.</p>
+          <div class="actions">
+            <a class="accept" id="accept" href="RESEARCH.html">I understand, continue to the study brief</a>
+            <span class="scope">Informational page. Not a research target.</span>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div class="foot">
+    <div class="ticks" aria-hidden="true">
+      <span class="tick"><i></i></span><span class="tick"><i></i></span><span class="tick"><i></i></span><span class="tick"><i></i></span><span class="tick"><i></i></span>
+    </div>
+    <span class="hint">click, space or arrow keys to move on</span>
+  </div>
+</div>
+
+<script>
+(function () {
+  var KEY = 'tarnhaven_ack';
+  var beats = [].slice.call(document.querySelectorAll('.beat'));
+  var ticks = [].slice.call(document.querySelectorAll('.tick'));
+  var frame = document.getElementById('frame');
+  var accept = document.getElementById('accept');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var last = beats.length - 1, cur = -1, timer = null;
+
+  function split(node) {
+    [].slice.call(node.childNodes).forEach(function (c) {
+      if (c.nodeType !== 3) return;
+      var f = document.createDocumentFragment();
+      c.textContent.split(/(\s+)/).forEach(function (t) {
+        if (!t) return;
+        if (/^\s+$/.test(t)) { f.appendChild(document.createTextNode(t)); return; }
+        var s = document.createElement('span');
+        s.className = 'w'; s.textContent = t; f.appendChild(s);
+      });
+      node.replaceChild(f, c);
+    });
+  }
+  document.querySelectorAll('.beat p, .beat h1').forEach(split);
+
+  function show(n) {
+    clearTimeout(timer);
+    n = Math.max(0, Math.min(last, n));
+    cur = n;
+    beats.forEach(function (b, k) {
+      var words = b.querySelectorAll('.w'), extra = b.querySelector('.actions');
+      if (k === n) {
+        words.forEach(function (w, j) { w.style.transitionDelay = (reduce ? 0 : 250 + j * 45) + 'ms'; });
+        if (extra) extra.style.transitionDelay = (reduce ? 0 : 600 + words.length * 45) + 'ms';
+        b.classList.add('on');
+      } else if (b.classList.contains('on')) {
+        b.classList.remove('on');
+        words.forEach(function (w) { w.style.transitionDelay = '0ms'; });
+        if (extra) extra.style.transitionDelay = '0ms';
+      }
+    });
+    var count = beats[n].querySelectorAll('.w').length;
+    var dwell = n === 0 ? 3600 : Math.max(4200, count * 250 + 2200);
+    frame.style.setProperty('--dwell', dwell + 'ms');
+    ticks.forEach(function (t, k) {
+      var c = n > 0 && k === n - 1;
+      t.className = 'tick' + (n > 0 && k < n - 1 ? ' done' : '') + (c ? ' cur' : '') + (c && n === last ? ' last' : '');
+    });
+    document.body.classList.toggle('final', n === last);
+    if (n < last && !reduce) timer = setTimeout(function () { show(cur + 1); }, dwell);
+  }
+
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('a, button') || cur >= last) return;
+    show(cur + 1);
+  });
+  document.getElementById('skip').addEventListener('click', function () { show(last); });
+  document.addEventListener('keydown', function (e) {
+    var inCtl = e.target.closest && e.target.closest('a, button');
+    if (e.key === 'ArrowRight' || (e.key === ' ' && !inCtl)) { e.preventDefault(); if (cur < last) show(cur + 1); }
+    else if (e.key === 'ArrowLeft') { show(cur - 1); }
+  });
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) clearTimeout(timer);
+    else if (cur >= 0 && cur < last && !reduce) timer = setTimeout(function () { show(cur + 1); }, 3000);
+  });
+
+  accept.addEventListener('click', function (e) {
+    e.preventDefault();
+    try { sessionStorage.setItem(KEY, '1'); } catch (_) {}
+    document.body.classList.add('leaving');
+    setTimeout(function () { location.href = accept.getAttribute('href'); }, reduce ? 0 : 700);
+  });
+
+  var ready = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+  ready.then(function () { setTimeout(function () { show(0); }, 300); });
+})();
+</script>
+</body>
+</html>
