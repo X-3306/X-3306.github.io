@@ -1,0 +1,4 @@
+Contact: mailto:X3306.Business@proton.me
+Expires: 2027-10-17T00:00:00.000Z
+Preferred-Languages: en, pl
+Canonical: https://x-3306.github.io/.well-known/security.txt
