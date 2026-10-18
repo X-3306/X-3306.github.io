@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
-"""Sync Medium posts into articles.json and the static HTML of the site.
+"""Sync Medium posts into articles.json and the static HTML of the site."""
 
-No dependencies. Run by GitHub Actions on a schedule (see .github/workflows/medium-sync.yml).
-If Medium cannot be reached, the script keeps the existing data and exits cleanly.
-"""
 import html
 import json
 import re
@@ -131,7 +128,7 @@ def main():
     ld_block = '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + "</script>" if posts else ""
     inject("articles.html", "<!--LD:START-->", "<!--LD:END-->", ld_block)
 
-    if posts:  # keep sitemap lastmod honest
+    if posts:  
         sm = ROOT / "sitemap.xml"
         s = sm.read_text(encoding="utf-8")
         for loc in (SITE + "/", SITE + "/articles.html"):
