@@ -1,1 +1,54 @@
-[]
+[
+  {
+    "title": "Multi-Stage MaaS Malware and Developer Supply-Chain Infection Analysis",
+    "link": "https://medium.com/@X-3306/multi-stage-maas-malware-and-developer-supply-chain-infection-analysis-52efd43079d5",
+    "date": "2026-09-10",
+    "subtitle": "At the beginning, I had no idea what void.exe was connected to. It looked like a suspicious file that had been shared with me for analysis. I moved it into a REMnux...",
+    "image": "https://cdn-images-1.medium.com/proxy/1*BYWMAGDZAPQSwSBnNcoOSQ.png",
+    "tags": [
+      "osint",
+      "supply-chain-security",
+      "information-security",
+      "cybersecurity"
+    ]
+  },
+  {
+    "title": "Shifting the EDR Evasion Angle: From Signature Obfuscation to Behavioral Camouflage",
+    "link": "https://medium.com/@X-3306/shifting-the-edr-evasion-angle-from-signature-obfuscation-to-behavioral-camouflage-9b7ec93766f6",
+    "date": "2026-06-30",
+    "subtitle": "I’ve been working on a research project that explores a slightly different angle on EDR and AV evasion. Rather than relying on traditional signature obfuscation or...",
+    "image": "https://cdn-images-1.medium.com/max/1024/0*-Lz-vGqzOh0M76Q-.png",
+    "tags": [
+      "steganography",
+      "machine-learning",
+      "red-team",
+      "malware"
+    ]
+  },
+  {
+    "title": "Harvest Now, Decrypt Later: The Silent Threat to Internet Security",
+    "link": "https://medium.com/@X-3306/harvest-now-decrypt-later-the-silent-threat-to-internet-security-e05da9e1feab",
+    "date": "2025-12-31",
+    "subtitle": "MY SPECULATIONS:",
+    "image": "https://cdn-images-1.medium.com/max/1024/1*0-uxzclvMshD4FR6zRMPbQ.png",
+    "tags": [
+      "cryptography",
+      "post-quantum-cryptography",
+      "privacy",
+      "hndl"
+    ]
+  },
+  {
+    "title": "API Rate Limiting Bypass Leading to Unlimited Access to Premium Features in explorer.globe.engineer",
+    "link": "https://medium.com/@X-3306/api-rate-limiting-bypass-leading-to-unlimited-access-to-premium-features-in-explorer-globe-engineer-63583dd08f07",
+    "date": "2025-07-10",
+    "subtitle": "02.11.2024 — Informed the site creators directly via the provided email address",
+    "image": "https://cdn-images-1.medium.com/max/1024/1*qqwwqTSP1J1tyPXwicIPHg.png",
+    "tags": [
+      "bypass",
+      "bug-bounty",
+      "endpoint-security",
+      "api"
+    ]
+  }
+]
