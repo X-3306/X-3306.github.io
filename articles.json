@@ -1,5 +1,18 @@
 [
   {
+    "title": "Two clicks to bypass the entire API",
+    "link": "https://infosecwriteups.com/two-clicks-to-bypass-the-entire-api-5034e9d935cb",
+    "date": "2026-10-21",
+    "subtitle": "How a Plain RapidAPI Test Console Exposed a Backend That Never Checked Who Was Asking (BreachDirectory.org)",
+    "image": "https://cdn-images-1.medium.com/max/1024/1*LSWy0mB3jlFuOexVg1hvVQ.png",
+    "tags": [
+      "bug-bounty",
+      "cybersecurity",
+      "api",
+      "bypass"
+    ]
+  },
+  {
     "title": "Multi-Stage MaaS Malware and Developer Supply-Chain Infection Analysis",
     "link": "https://medium.com/@X-3306/multi-stage-maas-malware-and-developer-supply-chain-infection-analysis-52efd43079d5",
     "date": "2026-09-10",
@@ -39,6 +52,58 @@
     ]
   },
   {
+    "title": "The Physics of Hardware Hacking (Part 1)",
+    "link": "https://medium.com/@X-3306/the-physics-of-hardware-hacking-part-1-eb39044163c1",
+    "date": "2025-12-10",
+    "subtitle": "Why your “digital” device is just an analog circuit waiting to be broken — and why you don’t need a NASA lab to do it.",
+    "image": "https://cdn-images-1.medium.com/max/1024/1*Ty5ZZzsjLCUTxlKKXj1sMg.png",
+    "tags": [
+      "hardware-hacking",
+      "cybersecurity",
+      "raspberry-pi",
+      "embedded-systems"
+    ]
+  },
+  {
+    "title": "I Hid Messages in Flickering Noise That Only Cameras Can See: Introducing OTIS",
+    "link": "https://medium.com/@X-3306/i-hid-messages-in-flickering-noise-that-only-cameras-can-see-introducing-otis-8cdbbb00fc06",
+    "date": "2025-11-19",
+    "subtitle": "Conclusion:",
+    "image": "https://cdn-images-1.medium.com/max/776/1*mTUq9dQrM2SZRwcl3CvPhw.png",
+    "tags": [
+      "optics",
+      "hidden",
+      "steganography",
+      "message"
+    ]
+  },
+  {
+    "title": "Inside the Takedown: Technical Forensic Analysis of How Authorities Unmasked and Apprehended the…",
+    "link": "https://medium.com/@X-3306/inside-the-takedown-technical-forensic-analysis-of-how-authorities-unmasked-and-apprehended-the-4f0468b662f9",
+    "date": "2025-07-28",
+    "subtitle": "Pinpointing the Administrator",
+    "image": "https://cdn-images-1.medium.com/max/1024/0*jwdrK8nwWA2N-Qy9",
+    "tags": [
+      "btc",
+      "investigation",
+      "forum",
+      "cybercrime"
+    ]
+  },
+  {
+    "title": "Quantum Key Distribution Under Attack: Analysis of Contemporary Attack Vectors and Practical…",
+    "link": "https://medium.com/@X-3306/quantum-key-distribution-under-attack-analysis-of-contemporary-attack-vectors-and-practical-0968bff477ae",
+    "date": "2025-07-12",
+    "subtitle": "Fundamentals of Attack Classification: Passive vs. Active:",
+    "image": "https://cdn-images-1.medium.com/max/1024/0*KBSu17UEVoEHOCag",
+    "tags": [
+      "quantum-key-distribution",
+      "quantum-computing",
+      "hacking",
+      "attack-vector"
+    ]
+  },
+  {
     "title": "API Rate Limiting Bypass Leading to Unlimited Access to Premium Features in explorer.globe.engineer",
     "link": "https://medium.com/@X-3306/api-rate-limiting-bypass-leading-to-unlimited-access-to-premium-features-in-explorer-globe-engineer-63583dd08f07",
     "date": "2025-07-10",
@@ -50,5 +115,13 @@
       "endpoint-security",
       "api"
     ]
+  },
+  {
+    "title": "little-known vulnerabilities.",
+    "link": "https://medium.com/@X-3306/little-known-vulnerabilities-7fc804a95ed5",
+    "date": "2023-02-12",
+    "subtitle": "Injection Vector Override Attack (IVO) Injection Vector Override Attack is a type of cyber attack where the attacker injects malicious code into a web application,...",
+    "image": "https://cdn-images-1.medium.com/max/1024/1*e7cyEi3AqK6CTnyNY06fDg.jpeg",
+    "tags": []
   }
 ]
