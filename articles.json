@@ -1,5 +1,18 @@
 [
   {
+    "title": "OSINT Without Paid APIs: 5 Free Sources to Start With",
+    "link": "https://osintteam.blog/osint-without-paid-apis-5-free-sources-to-start-with-46d8d4d24ca3",
+    "date": "2026-10-23",
+    "subtitle": "Wikidata, Overpass, RDAP, crt.sh…and the last one is the tool you probably haven’t tried yet",
+    "image": "https://cdn-images-1.medium.com/max/1024/1*2rWgUx2rbGD3MUA9yilEwg.png",
+    "tags": [
+      "reconnaissance",
+      "cybersecurity",
+      "osint",
+      "infosec"
+    ]
+  },
+  {
     "title": "Two clicks to bypass the entire API",
     "link": "https://infosecwriteups.com/two-clicks-to-bypass-the-entire-api-5034e9d935cb",
     "date": "2026-10-21",
